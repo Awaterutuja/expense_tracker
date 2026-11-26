@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface ExpenseRepositoryPort {
     Expense save(Expense expense);
-    Optional<Expense> findById(Long id);
+    Optional<Expense> findById(String id);
 }
