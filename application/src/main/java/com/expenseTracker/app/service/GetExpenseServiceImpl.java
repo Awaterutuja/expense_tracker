@@ -4,7 +4,8 @@ import com.expenseTracker.domain.model.Expense;
 import com.expenseTracker.domain.port.in.GetExpenseService;
 import com.expenseTracker.domain.port.out.GetExpensePort;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
+import java.time.YearMonth;
+import java.util.List;
 
 @Service
 public class GetExpenseServiceImpl implements GetExpenseService {
@@ -16,7 +17,12 @@ public class GetExpenseServiceImpl implements GetExpenseService {
     }
 
     @Override
-    public Optional<Expense> getById(Long id) {
-        return getExpensePort.findById(id);
+    public List<Expense> getAll() {
+        return getExpensePort.findAll();
+    }
+
+    @Override
+    public List<Expense> getByMonth(YearMonth month) {
+        return getExpensePort.findByDateRange(month.atDay(1), month.plusMonths(1).atDay(1));
     }
 }

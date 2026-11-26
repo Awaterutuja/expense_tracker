@@ -5,6 +5,7 @@ import com.expenseTracker.domain.port.in.AddExpenseService;
 import com.expenseTracker.domain.port.out.AddExpensePort;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Service
 public class AddExpenseServiceImpl implements AddExpenseService {
@@ -22,7 +23,7 @@ public class AddExpenseServiceImpl implements AddExpenseService {
         }
         LocalDate date = command.date() != null ? command.date() : LocalDate.now();
 
-        Expense expense = new Expense(null, command.title(), command.amount(),
+        Expense expense = new Expense(UUID.randomUUID().toString(), command.title(), command.amount(),
                 command.category(), date, command.note());
         return addExpensePort.save(expense);
     }
